@@ -19,7 +19,7 @@ END;
 
 
 --Requisito Nº4
-create or replace procedure BurcarHotel(hotel varchar2)
+create or replace procedure BuscarHotel(hotel varchar2)
 is
     id number;
     nombre varchar2(50);
@@ -36,7 +36,7 @@ close hoteles;
     for reg in hoteles loop
         DBMS_output.put_line('Nombre: '|| reg.nomHotel || ', ID: ' || reg.idHotel);
     end loop;    
-end BurcarHotel;
+end BuscarHotel;
 /
 --Requisito Nº5
 --Requisito Nº6
