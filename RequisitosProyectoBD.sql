@@ -1,6 +1,23 @@
 --Requisito Nº1
 --Requisito Nº2
 --Requisito Nº3
+CREATE OR REPLACE PROCEDURE RellenarPrepHuesped IS
+DECLARE
+
+v_idH VARCHAR2(20);
+v_idP VARCHAR2(20);
+
+
+BEGIN
+
+v_idH := '&ID_del_Huesped';
+v_idP := '&ID_del_Prepago';
+
+END;
+/
+
+
+
 --Requisito Nº4
 create or replace procedure BurcarHotel(hotel varchar2)
 is
