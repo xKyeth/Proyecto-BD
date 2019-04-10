@@ -1,0 +1,1 @@
+DMBS_OUT.PUT_LINE('Hola Mundo');
