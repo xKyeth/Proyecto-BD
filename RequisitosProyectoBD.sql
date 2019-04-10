@@ -2,16 +2,18 @@
 --Requisito Nº2
 --Requisito Nº3
 CREATE OR REPLACE PROCEDURE RellenarPrepHuesped IS
-DECLARE
 
-v_idH VARCHAR2(20);
-v_idP VARCHAR2(20);
+v_idH NUMBER(12);
+v_idP NUMBER(12);
 
 
 BEGIN
 
 v_idH := '&ID_del_Huesped';
+--funcion que verifica que el id del huespes esta en la BD
 v_idP := '&ID_del_Prepago';
+
+INSERT INTO prepHues VALUES (v_idP,v_idH);
 
 END;
 /
