@@ -175,11 +175,15 @@ begin
         DBMS_OUTPUT.PUT_LINE('Nombre: '||reg.Nombre||', Total pagado: '|| reg.totalpag);
     end loop;
     for reg in Pagos loop
-        DBMS_OUTPUT.PUT_LINE('Nombre: '||reg.Nombre||', ID prepago: '|| reg.idprepago || ', pagado: ' || reg.totalpag);
+        DBMS_OUTPUT.PUT_LINE('ID prepago: '|| reg.idprepago || ', cantidad: ' || reg.totalpag);
     end loop;
 end pagosAnuales;
 /
 --Requisito Nº12
 --Requisito Nº13
 --Requisito Nº14
+Create or replace procedure imprReserva(idReserva)
+is
+Begin
+end imprReserva
 --Requisito Nº15
