@@ -34,19 +34,88 @@ begin
 end ocuparHab;
 /
 --Requisito Nº3
-CREATE OR REPLACE PROCEDURE RellenarPrepHuesped IS
 
-v_idH NUMBER(12);
-v_idP NUMBER(12);
+CREATE OR REPLACE FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
 
+CURSOR curs IS
+    SELECT idhuesped FROM huesped;
+registro curs%ROWTYPE;
 
 BEGIN
 
-v_idH := '&ID_del_Huesped';
---funcion que verifica que el id del huespes esta en la BD
-v_idP := '&ID_del_Prepago';
+OPEN curs;
 
-INSERT INTO prepHues VALUES (v_idP,v_idH);
+    FETCH curs INTO registro;
+
+    IF idHues IN (registro.idhuesped) THEN
+        DBMS_OUTPUT.PUT_LINE('El huesped existe en la base de datos');
+        return true;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El huesped no existe en la base de datos');
+        return false;
+    END IF;
+    
+CLOSE curs;
+END;
+/
+    
+
+CREATE OR REPLACE FUNCTION comprPrepago (idPrep NUMBER) RETURN BOOLEAN IS
+
+CURSOR curs IS
+    SELECT idprepago FROM prepago;
+    
+registro curs%ROWTYPE;
+
+BEGIN
+
+OPEN curs;
+
+    FETCH curs INTO registro;
+
+    IF idPrep IN (registro.idprepago) THEN
+        DBMS_OUTPUT.PUT_LINE('El prepago existe en la base de datos');
+        return true;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El prepago no existe en la base de datos');
+        return false;
+    END IF;
+    
+CLOSE curs;
+END;
+/
+
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE RellenarPrepHuesped(v_idH NUMBER, v_idP NUMBER) IS
+BEGIN
+
+
+
+IF(comprhuesped(v_idH)) THEN
+            DBMS_OUTPUT.PUT_LINE('primer if');
+
+    IF(comprPrepago(v_idP)) THEN
+            DBMS_OUTPUT.PUT_LINE('segundo if');
+
+        INSERT INTO prepHues VALUES (v_idP,v_idH);
+    END IF;
+END IF;
+END;
+/
+
+
+DECLARE
+
+idH NUMBER;
+idP NUMBER;
+
+BEGIN
+
+idH:='&IDHuespd';
+idP:='&IDPrepago';
+
+rellenarprephuesped(idH,idP);
 
 END;
 /
