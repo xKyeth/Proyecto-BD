@@ -160,6 +160,62 @@ close hoteles;
 end BuscarHotel;
 /
 --Requisito Nº6
+
+
+/*Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
+con todos los datos del Huesped.*/
+CREATE OR REPLACE PROCEDURE FichaHuesped (idH NUMBER) IS
+CURSOR curs IS
+    SELECT * FROM HUESPED WHERE idHuesped=idH;
+
+registro curs%rowtype;
+BEGIN
+OPEN CURS;
+
+    LOOP
+    
+    FETCH curs INTO registro;
+    
+    EXIT WHEN curs%notfound;
+
+    IF (comprhuesped(idH))THEN
+    DBMS_OUTPUT.PUT_LINE('Imprimiendo ficha del cliente');
+    DBMS_OUTPUT.PUT_LINE(' ');
+    DBMS_OUTPUT.PUT_LINE('***********************************************************************************************');
+    DBMS_OUTPUT.PUT_LINE('INFORMACION DEL CLIENTE');
+    DBMS_OUTPUT.PUT_LINE('Codigo del Huespued : '|| registro.idHuesped);
+    DBMS_OUTPUT.PUT_LINE('Nombre del Huespued : '|| registro.nomhuesped || ' ,Primer apellido : '||registro.apepaterno || ' ,Segundo apellido : '||registro.apematerno);
+    DBMS_OUTPUT.PUT_LINE('El cliente ha traido el tipo de documento : '||registro.tipodocumento||' y el numero del documento es : '||registro.numdocumento);
+    DBMS_OUTPUT.PUT_LINE('PARA CONTACTAR CON EL CLIENTE');
+    DBMS_OUTPUT.PUT_LINE('Email : '||registro.email ||'   Telefono : '||registro.tel);
+    DBMS_OUTPUT.PUT_LINE('***********************************************************************************************');  
+
+    END IF;
+
+    END LOOP;
+    
+CLOSE CURS;
+END;
+/
+
+
+/*Codigo a ejecutar. Pide que se introduzca manualmente el ID del Huesped y se carga el procedimiento fichahuesped*/
+DECLARE
+
+v_idH NUMBER;
+
+BEGIN
+
+v_idH:='&IDHuesped';
+fichahuesped(v_idH);
+
+END;
+/
+
+
+
+
+
 --Requisito Nº7
 --Requisito Nº8
 --Requisito Nº9
