@@ -37,6 +37,7 @@ BEGIN
     end loop;
 END ocuparHabitaciones;
 /
+
 --Requisito Nº3
 
 /*Funcion que recibe por parametro el ID de Huesped y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
@@ -159,8 +160,8 @@ close hoteles;
     end loop;    
 end BuscarHotel;
 /
---Requisito Nº6
 
+--Requisito Nº6
 
 /*Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
 con todos los datos del Huesped.*/
@@ -211,9 +212,6 @@ fichahuesped(v_idH);
 
 END;
 /
-
-
-
 
 
 --Requisito Nº7
