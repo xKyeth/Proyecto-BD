@@ -374,8 +374,9 @@ DROP TABLE HOTEL;
 DROP TABLE ciudad;
 DROP TABLE PAIS;
 
+--Alteraciones de Tablas y Campos
+Alter table prepago add total number(8,2);
+Update prepago set total=1500.00;
 
 
-
-
-    
+Commit;  
