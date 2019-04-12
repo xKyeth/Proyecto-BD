@@ -375,8 +375,18 @@ DROP TABLE ciudad;
 DROP TABLE PAIS;
 
 --Alteraciones de Tablas y Campos
+
 Alter table prepago add total number(8,2);
 Update prepago set total=1500.00;
+
+INSERT INTO huesped VALUES (1,'Alexis','Flores','Santos', 1, 1112, 'Huesped1@hotmail.com',954123451);
+INSERT INTO huesped VALUES (2,'Ian','Bosch','Jimenez', 1, 1213, 'Huesped2@Gmail.com',954123452);
+INSERT INTO huesped VALUES (3,'Ivan','Alvarez','Blanco', 1, 1314, 'Huesped3@Gmail.com',954123453);
+INSERT INTO huesped VALUES (4,'Joel','Gonzalez','Ruiz', 1, 1415, 'Huesped4@Gmail.com',954123454);
+INSERT INTO huesped VALUES (5,'Aitor','Dominguez','Pastor',1, 1516, 'Huesped5@Gmail.com',954123455);
+INSERT INTO huesped VALUES (6,'Jimena','Pujol','Nuñez', 1, 1617, 'Huesped6@Gmail.com',954123456);
+INSERT INTO huesped VALUES (7,'Mireia','Medina','Arias', 1, 1718, 'Huesped7@Gmail.com',954123457);
+INSERT INTO huesped VALUES (8,'Leire','Reyes','Lopez',1, 1819, 'Huesped8@Gmail.com',954123458);
 
 
 Commit;  
