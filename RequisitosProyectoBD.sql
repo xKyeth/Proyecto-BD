@@ -39,10 +39,13 @@ END ocuparHabitaciones;
 /
 --Requisito Nº3
 
+/*Funcion que recibe por parametro el ID de Huesped y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
+devolvera un false.*/
+
 CREATE OR REPLACE FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
 
 CURSOR curs IS
-    SELECT idhuesped FROM huesped;
+    SELECT idhuesped FROM huesped WHERE idhuesped=idHues; 
 registro curs%ROWTYPE;
 
 BEGIN
@@ -53,21 +56,23 @@ OPEN curs;
 
     IF idHues IN (registro.idhuesped) THEN
         DBMS_OUTPUT.PUT_LINE('El huesped existe en la base de datos');
-        return true;
+        RETURN TRUE;
     ELSE
         DBMS_OUTPUT.PUT_LINE('El huesped no existe en la base de datos');
-        return false;
+        RETURN false;
     END IF;
     
 CLOSE curs;
 END;
 /
     
+/*Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
+devolvera un false.*/
 
 CREATE OR REPLACE FUNCTION comprPrepago (idPrep NUMBER) RETURN BOOLEAN IS
 
 CURSOR curs IS
-    SELECT idprepago FROM prepago;
+    SELECT idprepago FROM prepago WHERE idprepago=idPrep;
     
 registro curs%ROWTYPE;
 
@@ -76,38 +81,41 @@ BEGIN
 OPEN curs;
 
     FETCH curs INTO registro;
-
+    
     IF idPrep IN (registro.idprepago) THEN
-        DBMS_OUTPUT.PUT_LINE('El prepago existe en la base de datos');
+        DBMS_OUTPUT.PUT_LINE('El prepago existe en la base de datos.');
         return true;
     ELSE
-        DBMS_OUTPUT.PUT_LINE('El prepago no existe en la base de datos');
+        DBMS_OUTPUT.PUT_LINE('El prepago no existe en la base de datos.');
         return false;
     END IF;
-    
+       
 CLOSE curs;
 END;
 /
 
-SET SERVEROUTPUT ON;
+
+/*Procedimiento que recibe por parametro los ID de huesped y prepago,llama a las dos funciones que verifican que exite el idHuesped y el idPrepago.
+Si existe el idHuesped se procede a verificar el idPrepago, si los dos existen se insertan los datos*/
 
 CREATE OR REPLACE PROCEDURE RellenarPrepHuesped(v_idH NUMBER, v_idP NUMBER) IS
 BEGIN
 
-
-
 IF(comprhuesped(v_idH)) THEN
-            DBMS_OUTPUT.PUT_LINE('primer if');
 
     IF(comprPrepago(v_idP)) THEN
-            DBMS_OUTPUT.PUT_LINE('segundo if');
-
-        INSERT INTO prepHues VALUES (v_idP,v_idH);
+    
+        INSERT INTO prepHues VALUES (v_idP,v_idH);       
+        DBMS_OUTPUT.PUT_LINE('Se ha introducido correctamente el huesped con ID : '||v_idh||' y el prepago con ID : '||v_idp||'.');
+        
     END IF;
+    
 END IF;
 END;
 /
 
+/*Codigo a ejecutar. Pide el id del Huesped y del Prepago a introducir manualmente, verifica que cada uno de ellos exista en la base de datos.
+Si existen se introduciran en la base de datos,en el caso de que no existan saldra del proceso.*/
 
 DECLARE
 
@@ -123,8 +131,6 @@ rellenarprephuesped(idH,idP);
 
 END;
 /
-
-
 
 --Requisito Nº4
 
