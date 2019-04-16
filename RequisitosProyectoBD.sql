@@ -242,8 +242,34 @@ end pagosAnuales;
 --Requisito Nº12
 --Requisito Nº13
 --Requisito Nº14
-Create or replace procedure imprReserva(idReserva)
+Create or replace procedure imprReserva(idR number)
 is
+    Cursor reserva is Select r.* ,rg.descrRegimen, h.nomHotel  
+        from reserva r, hotel h, regimen rg  
+        where r.idreserva=idR
+        and rg.idRegimen=r.idRegimen and r.idHotel=h.idHotel; 
+    registro reserva%rowtype;
 Begin
-end imprReserva
+    open reserva;
+    FETCH reserva INTO registro;
+    if reserva%FOUND then
+    DBMS_OUTPUT.PUT_LINE('Imprimiendo ficha de la reserva');
+    DBMS_OUTPUT.PUT_LINE(' ');
+    DBMS_OUTPUT.PUT_LINE('***********************************************************************************************');
+    DBMS_OUTPUT.PUT_LINE('INFORMACION DE LA RESERVA');
+    DBMS_OUTPUT.PUT_LINE('ID de la Reserva : ' || registro.idReserva);
+    DBMS_OUTPUT.PUT_LINE('Email del usuario : ' || registro.usremail);
+    DBMS_OUTPUT.PUT_LINE('Hotel : ' || registro.nomHotel);
+    DBMS_OUTPUT.PUT_LINE('  Nº Habitacion : ' || registro.numHabitacion);
+    DBMS_OUTPUT.PUT_LINE('  Nº Huespedes : ' || registro.canthuesp);
+    DBMS_OUTPUT.PUT_LINE('  Tipo de reserva : ' || registro.descrRegimen);
+    DBMS_OUTPUT.PUT_LINE('Fecha de la reserva : ' || registro.fchReserva);
+    DBMS_OUTPUT.PUT_LINE('  Inicio de la reserva : ' || registro.fchDesde);
+    DBMS_OUTPUT.PUT_LINE('  Fin de la reserva : ' || registro.fchHasta);
+    DBMS_OUTPUT.PUT_LINE('***********************************************************************************************');    
+    else
+    DBMS_OUTPUT.PUT_LINE('No existe reserva para el este id');
+    end if;
+end imprReserva;
+/
 --Requisito Nº15
