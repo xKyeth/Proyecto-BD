@@ -392,6 +392,7 @@ Alter table huesped add
     pais number(2,0);
 Alter table huesped add 
     constraint hus_pai_fk FOREIGN KEY(pais) REFERENCES Pais;
+Update huesped set pais=1;
 
 create table metodo_de_pago (
 codigo_metodo number(2) constraint met_cod_pk Primary key,
