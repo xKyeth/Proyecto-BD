@@ -389,4 +389,21 @@ INSERT INTO huesped VALUES (7,'Mireia','Medina','Arias', 1, 1718, 'Huesped7@Gmai
 INSERT INTO huesped VALUES (8,'Leire','Reyes','Lopez',1, 1819, 'Huesped8@Gmail.com',954123458);
 
 
+CREATE TABLE cupon (
+
+    idCupon VARCHAR2(10),
+    descuento NUMBER(3)
+
+);
+
+
+INSERT INTO cupon VALUES ('UX3FmJxMVc',15);
+INSERT INTO cupon VALUES ('uQB7SHHjxn',25);
+INSERT INTO cupon VALUES ('L13Bm39JVd',20);
+INSERT INTO cupon VALUES ('k1mjr9CtIM',12);
+INSERT INTO cupon VALUES ('sZINDNTv9p',8);
+INSERT INTO cupon VALUES ('X3UodVmG96',3);
+
+
+
 Commit;  
