@@ -349,11 +349,29 @@ end;
 exec fichahoteles ('14325');
 
 --Requisito Nº8
-Create or replace procedure pagosPais(idHues number, pais varchar2)
-is
+/*Nombre componente: reservasPais
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripción: Procedimiento que pasado un pais devuelve las reservas que hicieron los cliente de este*/
 
+Create or replace procedure reservasPais(pai varchar2)
+is
+    Cursor clientes is Select h.idHuesped, h.nomHuesped, pr.total, rs.fchreserva, rs.fchdesde, rs.fchhasta, 
+        ho.nomhotel, rs.numhabitacion, rg.Descrregimen
+        from pais pa, huesped h, prephues ph, prepago pr, usuario us, reserva rs, hotel ho, regimen rg
+        where UPPER(pa.nompais)=UPPER(pai) and pa.idpais=h.pais
+        and ph.idhuesped=ph.idHuesped and ph.idprepago=pr.idprepago
+        and pr.usremail=us.usremail and us.usremail=rs.usremail
+        and rs.idhotel=ho.idhotel and rs.idregimen=rg.idregimen;
 begin
-end pagosPais;
+    for reg in clientes loop
+        DBMS_OUTPUT.PUT_LINE('Huesped : ' || reg.nomHuesped);
+        DBMS_OUTPUT.PUT_LINE('Fecha Reserva : ' || reg.fchdesde || 'Hasta ' || reg.fchhasta);
+        DBMS_OUTPUT.PUT_LINE('Regimen: ' || reg.Descrregimen);
+        DBMS_OUTPUT.PUT_LINE('Pago : ' || reg.total);
+        DBMS_OUTPUT.PUT_LINE('Hotel : ' || reg.nomhotel);
+        DBMS_OUTPUT.PUT_LINE('Habitacion : ' || reg.numhabitacion);
+    end loop;
+end reservasPais;
 /
 --Requisito Nº9
 
