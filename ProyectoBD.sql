@@ -425,5 +425,12 @@ INSERT INTO cupon VALUES ('sZINDNTv9p',8);
 INSERT INTO cupon VALUES ('X3UodVmG96',3);
 
 
+CREATE TABLE reservaPorPagar
+(
+usremail   CHAR(25) NOT NULL,
+CONSTRAINT   PK_usuario_res PRIMARY KEY (usremail)
+
+)
+
 
 Commit;  

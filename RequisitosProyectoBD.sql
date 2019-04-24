@@ -440,6 +440,30 @@ END;
 
 
 --Requisito Nº13
+/*Nombre componente: Enrique Albors Perilli
+Autor: Enrique Albors Perilli	Fecha: 24/04/2019
+Descripcion :Este trigger se dispará cuando se cree una nueva reserva , pasando el usuario que la cree a una tabla
+especifico para el
+*/
+
+INSERT INTO usuario VALUES ('usr8@gmail.com','pwd8');
+INSERT INTO reserva VALUES (11,'usr8@gmail.com',14325,1,1,'MP','31-12-2014','01-02-2015','15-02-2015');
+
+
+
+create or replace trigger esperareserva
+    after  insert on reserva 
+    for each row 
+begin
+
+    insert into reservaPorPagar values (:new.usremail);
+
+end;
+/
+
+
+select * from reservaPorPagar;
+
 --Requisito Nº14
 Create or replace procedure imprReserva(idR number)
 is
