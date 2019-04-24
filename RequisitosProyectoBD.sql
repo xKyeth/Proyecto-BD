@@ -1,6 +1,6 @@
---Requisito Nº1
---Requisito Nº2
-/*Funcion que comprueba las reservas y devuelve si una habitación se debe ocupar*/
+--Requisito NÂº1
+--Requisito NÂº2
+/*Funcion que comprueba las reservas y devuelve si una habitaciÃ³n se debe ocupar*/
 CREATE OR REPLACE FUNCTION comprHabitacion(numHab number, idHot number)
 return boolean is
     Cursor reservas is Select r.fchDesde, r.fchHasta from reserva r where r.numHabitacion=numHab and idHotel=idHot;
@@ -14,14 +14,14 @@ begin
     return ocupar;
 end comprHabitacion;
 /
-/*Procedimiento que pasando una habitación y si debe ocuparse(0/1), ocupa o desocupa la habitación*/
+/*Procedimiento que pasando una habitaciÃ³n y si debe ocuparse(0/1), ocupa o desocupa la habitaciÃ³n*/
 Create or replace procedure ocuparHab(numHab number, idHot number, ocupar number)
 is
 begin
     Update usoHab set ocupada=ocupar where idHotel=idHot and numHabitacion=numHab;
 end ocuparHab;
 /
-/*Procedimiento que recorre todas las habitaciones y utiliza el procedimiento y la función anterior para comprobar y ocupar las 
+/*Procedimiento que recorre todas las habitaciones y utiliza el procedimiento y la funciÃ³n anterior para comprobar y ocupar las 
 habitaciones*/
 CREATE OR REPLACE PROCEDURE ocuparHabitaciones
 IS
@@ -38,7 +38,7 @@ BEGIN
 END ocuparHabitaciones;
 /
 
---Requisito Nº3
+--Requisito NÂº3
 
     
 /*Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
@@ -107,9 +107,9 @@ rellenarprephuesped(idH,idP);
 END;
 /
 
---Requisito Nº4
+--Requisito NÂº4
 
---Requisito Nº5
+--Requisito NÂº5
 /*Procedimiento que pasado un nombre de ciudad comprueba si existen hoteles en dicha ciudad*/
 create or replace procedure BuscarHotel(ciudad varchar2)
 is
@@ -127,7 +127,7 @@ open hoteles;
         DBMS_OUTPUT.PUT_LINE('No hay ningun hotel');
     end if;
 close hoteles;
-    --Aqui muestro los registros de los del cursor, sino hubiese ninguno daría igual, ya que no se mostraría niguno y
+    --Aqui muestro los registros de los del cursor, sino hubiese ninguno darÃ­a igual, ya que no se mostrarÃ­a niguno y
     --y se activa el if anterior
     for reg in hoteles loop
         DBMS_output.put_line('Nombre: '|| reg.nomHotel || ', ID: ' || reg.idHotel);
@@ -135,7 +135,7 @@ close hoteles;
 end BuscarHotel;
 /
 
---Requisito Nº6
+--Requisito NÂº6
 
 /*Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
 con todos los datos del Huesped.*/
@@ -188,27 +188,21 @@ END;
 /
 
 
---Requisito Nº7
---Requisito Nº8
+--Requisito NÂº7
+--Requisito NÂº8
 Create or replace procedure pagosPais(idHues number, pais varchar2)
 is
 
 begin
 end pagosPais;
 /
---Requisito Nº9
-
-<<<<<<< HEAD
---Trigger que que cuando se vaya a ingresar un idHuesped en una tabla salte si no existe dicho huesped
+--Requisito NÂº9
 
 
 
-=======
->>>>>>> a12390fc71752e2fb9fbe617ef321302526c5fad
 
-
---Requisito Nº10
---Requisito Nº11
+--Requisito NÂº10
+--Requisito NÂº11
 Create or replace procedure pagosAnuales(idHues number, ano number)
 is
     Cursor Total is Select (h.nomhuesped || ' ' || h.apepaterno || ' ' || h.apematerno ) as Nombre, h.idhuesped, To_Char(NVL(SUM(pr.total), '0'), '999g999g990d99l' ) as totalpag
@@ -229,11 +223,9 @@ begin
     end loop;
 end pagosAnuales;
 /
---Requisito Nº12
+--Requisito NÂº12
 
-<<<<<<< HEAD
 
-=======
 CREATE OR REPLACE FUNCTION aplicarDescuento (idCup VARCHAR2, precio NUMBER) RETURN NUMBER IS
 
 v_precioConDesc NUMBER;
@@ -255,7 +247,7 @@ OPEN CURS;
     v_precioConDesc := precio/registro.descuento;        
     
     DBMS_OUTPUT.PUT_LINE('El precio original es : ' || precio || ' al que se le ha aplicado un descuento de : ' || registro.descuento || 
-    ' del cupón : ' || idCup || ' ,el precio con el descuento aplicado es : ' || ROUND(v_preciocondesc,2));
+    ' del cupÃ³n : ' || idCup || ' ,el precio con el descuento aplicado es : ' || ROUND(v_preciocondesc,2));
     
     END IF;
     
@@ -264,11 +256,10 @@ OPEN CURS;
 CLOSE CURS;
 END;
 /
->>>>>>> a12390fc71752e2fb9fbe617ef321302526c5fad
 
 
---Requisito Nº13
---Requisito Nº14
+--Requisito NÂº13
+--Requisito NÂº14
 Create or replace procedure imprReserva(idR number)
 is
     Cursor reserva is Select r.* ,rg.descrRegimen, h.nomHotel  
@@ -287,8 +278,8 @@ Begin
     DBMS_OUTPUT.PUT_LINE('ID de la Reserva : ' || registro.idReserva);
     DBMS_OUTPUT.PUT_LINE('Email del usuario : ' || registro.usremail);
     DBMS_OUTPUT.PUT_LINE('Hotel : ' || registro.nomHotel);
-    DBMS_OUTPUT.PUT_LINE('  Nº Habitacion : ' || registro.numHabitacion);
-    DBMS_OUTPUT.PUT_LINE('  Nº Huespedes : ' || registro.canthuesp);
+    DBMS_OUTPUT.PUT_LINE('  NÂº Habitacion : ' || registro.numHabitacion);
+    DBMS_OUTPUT.PUT_LINE('  NÂº Huespedes : ' || registro.canthuesp);
     DBMS_OUTPUT.PUT_LINE('  Tipo de reserva : ' || registro.descrRegimen);
     DBMS_OUTPUT.PUT_LINE('Fecha de la reserva : ' || registro.fchReserva);
     DBMS_OUTPUT.PUT_LINE('  Inicio de la reserva : ' || registro.fchDesde);
@@ -299,4 +290,4 @@ Begin
     end if;
 end imprReserva;
 /
---Requisito Nº15
+--Requisito NÂº15
