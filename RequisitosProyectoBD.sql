@@ -40,7 +40,8 @@ END ocuparHabitaciones;
 
 --Requisito Nº3
 
-    
+
+
 /*Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
 devolvera un false.*/
 
@@ -190,14 +191,31 @@ END;
 
 --Requisito Nº7
 --Requisito Nº8
-Create or replace procedure pagosPais(idHues number, pais varchar2)
-is
 
-begin
-end pagosPais;
-/
 --Requisito Nº9
 
+create or replace FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
+
+CURSOR curs IS
+    SELECT idhuesped FROM huesped WHERE idhuesped=idHues; 
+registro curs%ROWTYPE;
+
+BEGIN
+
+OPEN curs;
+
+    FETCH curs INTO registro;
+
+    IF idHues IN (registro.idhuesped) THEN
+        DBMS_OUTPUT.PUT_LINE('El huesped existe en la base de datos');
+        RETURN TRUE;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El huesped no existe en la base de datos');
+        RETURN false;
+    END IF;
+
+CLOSE curs;
+END;
 
 
 
