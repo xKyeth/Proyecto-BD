@@ -388,5 +388,42 @@ INSERT INTO huesped VALUES (6,'Jimena','Pujol','Nuñez', 1, 1617, 'Huesped6@Gmail
 INSERT INTO huesped VALUES (7,'Mireia','Medina','Arias', 1, 1718, 'Huesped7@Gmail.com',954123457);
 INSERT INTO huesped VALUES (8,'Leire','Reyes','Lopez',1, 1819, 'Huesped8@Gmail.com',954123458);
 
+Alter table huesped add 
+    pais number(2,0);
+Alter table huesped add 
+    constraint hus_pai_fk FOREIGN KEY(pais) REFERENCES Pais;
+Update huesped set pais=1;
+
+create table metodo_de_pago (
+codigo_metodo number(2) constraint met_cod_pk Primary key,
+empresa varchar2(1000)
+);
+alter table prepago add codigoPago number(2);
+alter table prepago add constraint prp_cpa_fk foreign key(codigoPago) References metodo_de_pago(codigo_metodo);
+
+
+insert into metodo_de_pago values (1 ,'paypal' );
+insert into metodo_de_pago values (2 ,'transferencia bancaria');
+insert into metodo_de_pago values (3 ,'ingreso en cajero ' );
+insert into metodo_de_pago values (4 ,'pago en efectivo');
+insert into metodo_de_pago values (5 ,'cheque al portador' );
+insert into metodo_de_pago values (6 ,'financiado a 2 meses' );
+
+CREATE TABLE cupon (
+
+    idCupon VARCHAR2(10),
+    descuento NUMBER(3)
+
+);
+
+
+INSERT INTO cupon VALUES ('UX3FmJxMVc',15);
+INSERT INTO cupon VALUES ('uQB7SHHjxn',25);
+INSERT INTO cupon VALUES ('L13Bm39JVd',20);
+INSERT INTO cupon VALUES ('k1mjr9CtIM',12);
+INSERT INTO cupon VALUES ('sZINDNTv9p',8);
+INSERT INTO cupon VALUES ('X3UodVmG96',3);
+
+
 
 Commit;  
