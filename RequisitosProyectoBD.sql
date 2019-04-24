@@ -195,7 +195,11 @@ end validaContra;
 
 
 --Requisito Nº5
-/*Procedimiento que pasado un nombre de ciudad comprueba si existen hoteles en dicha ciudad*/
+
+/*Nombre componente: BuscarHotel
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripción: Procedimiento que pasado un nombre de ciudad comprueba si existen hoteles en dicha ciudad*/
+
 create or replace procedure BuscarHotel(ciudad varchar2)
 is
     id number;
@@ -385,13 +389,18 @@ end;
 EXEC PAGOCORRECTO (8);
 
 --Requisito Nº11
+/*Nombre componente: pagosAnuales
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripción: Procedimiento en el cual se le pasa un huesped y una año y te devuelve los pagos de ese huesped ese año y el total*/
 Create or replace procedure pagosAnuales(idHues number, ano number)
 is
+    --Cursor en el cual saco el total de los pagos del cliente ese año
     Cursor Total is Select (h.nomhuesped || ' ' || h.apepaterno || ' ' || h.apematerno ) as Nombre, h.idhuesped, To_Char(NVL(SUM(pr.total), '0'), '999g999g990d99l' ) as totalpag
         from huesped h, prepago pr, prephues ph
         where h.idhuesped=idHues and h.idhuesped=ph.idhuesped
         and ph.idprepago=pr.idprepago and To_char(pr.fchprepago, 'yyyy')=ano
         group by (h.nomhuesped || ' ' || h.apepaterno || ' ' || h.apematerno ), h.idhuesped;
+    --Cursor en el cual saco los pagos para mostrarlos
     Cursor Pagos is Select (h.nomhuesped || ' ' || h.apepaterno || ' ' || h.apematerno ) as Nombre, h.idhuesped, pr.idprepago, To_Char(NVL(pr.total, '0'), '999g999g990d99l') as totalpag
         from huesped h, prepago pr, prephues ph
         where h.idhuesped=idHues and h.idhuesped=ph.idhuesped
@@ -465,8 +474,14 @@ end;
 select * from reservaPorPagar;
 
 --Requisito Nº14
+
+/*Nombre componente: imprReserva
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripción: Procedimiento el cual nos indica los datos de una reserva mostrando los datos de esta*/
+
 Create or replace procedure imprReserva(idR number)
 is
+    --Cursor en el cual saco la reserva junto con sus datos
     Cursor reserva is Select r.* ,rg.descrRegimen, h.nomHotel  
         from reserva r, hotel h, regimen rg  
         where r.idreserva=idR
