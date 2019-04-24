@@ -191,7 +191,11 @@ END;
 
 --Requisito Nº7
 --Requisito Nº8
+Create or replace procedure pagosPais(idHues number, pais varchar2)
+is
 
+begin
+end pagosPais;
 --Requisito Nº9
 
 create or replace FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
