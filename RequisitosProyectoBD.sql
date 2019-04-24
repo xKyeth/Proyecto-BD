@@ -1,8 +1,12 @@
 --Requisito N潞1
 --Requisito N潞2
-/*Funcion que comprueba las reservas y devuelve si una habitaci贸n se debe ocupar*/
+/*Nombre componente: comprHabitacion
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripci髇: Funcion que comprueba las reservas y devuelve si una habitaci贸n se debe ocupar*/
+
 CREATE OR REPLACE FUNCTION comprHabitacion(numHab number, idHot number)
 return boolean is
+    --Este cursor saca la reserva junto a la fecha de la estancia
     Cursor reservas is Select r.fchDesde, r.fchHasta from reserva r where r.numHabitacion=numHab and idHotel=idHot;
     ocupar boolean:=false;
 begin
@@ -14,15 +18,21 @@ begin
     return ocupar;
 end comprHabitacion;
 /
-/*Procedimiento que pasando una habitaci贸n y si debe ocuparse(0/1), ocupa o desocupa la habitaci贸n*/
+/*Nombre componente: ocuparHab
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripci髇: Procedimiento que pasando una habitaci贸n y si debe ocuparse(0/1), ocupa o desocupa la habitaci贸n*/
+
 Create or replace procedure ocuparHab(numHab number, idHot number, ocupar number)
 is
 begin
     Update usoHab set ocupada=ocupar where idHotel=idHot and numHabitacion=numHab;
 end ocuparHab;
 /
-/*Procedimiento que recorre todas las habitaciones y utiliza el procedimiento y la funci贸n anterior para comprobar y ocupar las 
+/*Nombre componente: ocuparHabitaciones
+Autor: Pedro Cortes	Fecha: 22/04/19
+Descripci髇: Procedimiento que recorre todas las habitaciones y utiliza el procedimiento y la funci贸n anterior para comprobar y ocupar las 
 habitaciones*/
+
 CREATE OR REPLACE PROCEDURE ocuparHabitaciones
 IS
     Cursor habitaciones is Select h.NUMHABITACION, h.idHotel
@@ -191,11 +201,11 @@ END;
 
 --Requisito N潞7
 --Requisito N潞8
-Create or replace procedure pagosPais(idHues number, pais varchar2)
+/*Create or replace procedure pagosPais(pais varchar2)
 is
-
+    Cursor clientes is Select 
 begin
-end pagosPais;
+end pagosPais;*/
 --Requisito N潞9
 
 create or replace FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
