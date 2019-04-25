@@ -354,8 +354,8 @@ end reservasPais;
 /
 --Requisito Nº9
 
-/*Nombre componente: Enrique Albors Perilli
-Autor: Enrique Imanol Garcia Fecha: 25/04/2019
+/*Nombre componente: comprHuesped
+Autor:Imanol Garcia Fecha: 25/04/2019
 Descripcion : Funcion que recibe el idHuesped por parametro que comprueba si existe en la base de datos, si existe devuelve true si no
 devuelve false*/
 
@@ -567,4 +567,8 @@ begin
     END IF;
 end audCiudad;
 /
+
+
+
+
 
