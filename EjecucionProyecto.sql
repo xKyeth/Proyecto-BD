@@ -1,9 +1,11 @@
 SET SERVEROUTPUT ON;
 --Requisito Nº1
 Declare
- 
+ cod char(2) := '&cod';
+ cod2 number(5,0):= '&cod2';
 Begin
     
+    buscaHabitacion(cod , cod2);
     
 End;
 /

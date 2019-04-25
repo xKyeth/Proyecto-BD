@@ -19,20 +19,20 @@ create or replace procedure buscaHabitacion(cod char , cod2 number)is
 begin
 open Y (cod ,cod2);
 
+    fetch Y into registro;
     if (Y%notfound)then
+                
+
             DBMS_OUTPUT.PUT_LINE('no existe los datos que usted pide');
         else 
-         loop
-            fetch Y into registro;
-                exit when Y%notfound;
-                DBMS_OUTPUT.PUT_LINE(registro.codigo_hotel ||' tiene  '|| registro.numero_camas);
-         end loop;
-    end if;
+         
+                DBMS_OUTPUT.PUT_LINE(registro.codigo_hotel ||' tiene los datos que usted desea ');
+        end if;
 close Y;
 end;
 /
 
-exec buscaHabitacion ( '1' ,'11111' );
+exec buscaHabitacion ( '3' ,'14325' );
 
 --Requisito Nº2
 /*Nombre componente: comprHabitacion
