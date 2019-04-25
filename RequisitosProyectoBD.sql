@@ -147,6 +147,20 @@ END;
  Autor: Enrique Albors Perilli	Fecha: 11/04/2019
 Descripciï¿½n: Este procedimiento permitiraï¿½ que se cree un usuario automï¿½ticamente pasando un email y su passw
  , ademas se pedirï¿½  una longitud minima de contraseï¿½a*/
+ 
+ --funcion validacion contra
+create or replace function validaContra (contra varchar2)
+return boolean is
+begin 
+ if (LENGTH(contra)>6)then
+    DBMS_OUTPUT.PUT_LINE('la longitud de su contraseña debe ser menor');RETURN false;
+    else 
+    DBMS_OUTPUT.PUT_LINE('la longitud de su  contraseña es correcta');return true;
+ end if;
+end validaContra;
+/
+
+
 
 create or replace procedure creaUsuario2 (usuario char , passwd char) is
  
@@ -167,18 +181,6 @@ end;
 
  exec creaUsuario2 ('3' , '3444558');
  select usremail  , usrpwd from usuario ;
-
---funcion validacion contra
-create or replace function validaContra (contra varchar2)
-return boolean is
-    begin 
-        if (LENGTH(contra)>6)then
-            DBMS_OUTPUT.PUT_LINE('la longitud de su contraseï¿½a debe ser mayor');RETURN false;
-        else 
-             DBMS_OUTPUT.PUT_LINE('la longitud de su  contraseï¿½a es correcta');return true;
-        end if;
-end validaContra;
-/
 
 
 --Requisito Nï¿½5
@@ -625,13 +627,13 @@ Create or replace trigger audREserva
     FOR EACH ROW
 begin
     IF DELETING THEN
-        auditoriatablas((:old_buffer.IdReserva ||' '|| :old_buffer.usrmail ||' '|| :old_buffer.idHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.canthuesp ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchreserva ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| 'Deleting Reserva'));
+        auditoriatablas((:old_buffer.IdReserva ||' '|| :old_buffer.usremail ||' '|| :old_buffer.idHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.canthuesp ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchreserva ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| 'Deleting Reserva'));
     END IF;
     IF updating THEN
-        auditoriatablas((:old_buffer.IdReserva ||' '|| :old_buffer.usrmail ||' '|| :old_buffer.idHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.canthuesp ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchreserva ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| 'Inserting Reserva'));
+        auditoriatablas((:old_buffer.IdReserva ||' '|| :old_buffer.usremail ||' '|| :old_buffer.idHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.canthuesp ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchreserva ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| 'Inserting Reserva'));
     END IF;
     if inserting THEN
-        auditoriatablas((:new_buffer.IdReserva ||' '|| :new_buffer.usrmail ||' '|| :new_buffer.idHotel ||' '|| :new_buffer.numhabitacion ||' '|| :new_buffer.canthuesp ||' '|| :new_buffer.idregimen ||' '|| :new_buffer.fchreserva ||' '|| :new_buffer.fchdesde ||' '|| :new_buffer.fchhasta ||' '|| 'Updating Reserva'));
+        auditoriatablas((:new_buffer.IdReserva ||' '|| :new_buffer.usremail ||' '|| :new_buffer.idHotel ||' '|| :new_buffer.numhabitacion ||' '|| :new_buffer.canthuesp ||' '|| :new_buffer.idregimen ||' '|| :new_buffer.fchreserva ||' '|| :new_buffer.fchdesde ||' '|| :new_buffer.fchhasta ||' '|| 'Updating Reserva'));
     END IF;
 end audHotel;
 /
