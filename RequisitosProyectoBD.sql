@@ -185,7 +185,7 @@ end;
 create or replace function validaContra (contra varchar2)
 return boolean is
     begin 
-        if (LENGTH(contra)>6)then
+        if (LENGTH(contra)<6)then
             DBMS_OUTPUT.PUT_LINE('la longitud de su contraseña debe ser menor');RETURN false;
         else 
              DBMS_OUTPUT.PUT_LINE('la longitud de su  contraseña es correcta');return true;
@@ -512,7 +512,7 @@ end;
 /
 
 
-select * from reservaPorPagar;
+
 
 --Requisito Nº14
 
