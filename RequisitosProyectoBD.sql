@@ -85,9 +85,11 @@ END ocuparHabitaciones;
 
 --Requisito Nº3
 
-    
-/*Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
-devolvera un false.*/
+/*Nombre componente: comprPrepago
+Autor: Imanol Garcia Fecha: 25/04/19
+Descripción: Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
+devolvera un false */
+
 
 CREATE OR REPLACE FUNCTION comprPrepago (idPrep NUMBER) RETURN BOOLEAN IS
 
@@ -115,8 +117,11 @@ END;
 /
 
 
-/*Procedimiento que recibe por parametro los ID de huesped y prepago,llama a las dos funciones que verifican que exite el idHuesped y el idPrepago.
-Si existe el idHuesped se procede a verificar el idPrepago, si los dos existen se insertan los datos*/
+/*Nombre componente: RellenarPrepHuesped
+Autor: Imanol Garcia Fecha: 25/04/19
+Descripción: Procedimiento que recibe por parametro los ID de huesped y prepago,llama a las dos funciones que verifican que exite el idHuesped y el idPrepago.
+Si existe el idHuesped se procede a verificar el idPrepago, si los dos existen se insertan los datos */
+
 
 CREATE OR REPLACE PROCEDURE RellenarPrepHuesped(v_idH NUMBER, v_idP NUMBER) IS
 BEGIN
@@ -134,23 +139,6 @@ END IF;
 END;
 /
 
-/*Codigo a ejecutar. Pide el id del Huesped y del Prepago a introducir manualmente, verifica que cada uno de ellos exista en la base de datos.
-Si existen se introduciran en la base de datos,en el caso de que no existan saldra del proceso.*/
-
-DECLARE
-
-idH NUMBER;
-idP NUMBER;
-
-BEGIN
-
-idH:='&IDHuespd';
-idP:='&IDPrepago';
-
-rellenarprephuesped(idH,idP);
-
-END;
-/
 
 --Requisito Nº4
 
@@ -226,8 +214,13 @@ end BuscarHotel;
 
 --Requisito Nº6
 
-/*Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
-con todos los datos del Huesped.*/
+
+/*Nombre componente: FichaHuesped
+Autor: Imanol Garcia Fecha: 25/04/19
+Descripción: Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
+con todos los datos del Huesped. */
+
+
 CREATE OR REPLACE PROCEDURE FichaHuesped (idH NUMBER) IS
 CURSOR curs IS
     SELECT * FROM HUESPED WHERE idHuesped=idH;
@@ -263,26 +256,12 @@ END;
 /
 
 
-/*Codigo a ejecutar. Pide que se introduzca manualmente el ID del Huesped y se carga el procedimiento fichahuesped*/
-DECLARE
-
-v_idH NUMBER;
-
-BEGIN
-
-v_idH:='&IDHuesped';
-fichahuesped(v_idH);
-
-END;
-/
-
 
 --Requisito Nº7
 
 /*Nombre componente: Enrique Albors Perilli
 Autor: Enrique Albors Perilli	Fecha: 17/04/2019
-Descripcion : Este procedimiento devolverá todos los datos relevantes de un hotel a raiz del codigo del hotel.
-*/
+Descripcion : Este procedimiento devolverá todos los datos relevantes de un hotel a raiz del codigo del hotel.*/
 
 
  create or replace procedure fichaHoteles (cod number) is
@@ -375,6 +354,11 @@ end reservasPais;
 /
 --Requisito Nº9
 
+/*Nombre componente: Enrique Albors Perilli
+Autor: Enrique Imanol Garcia Fecha: 25/04/2019
+Descripcion : Funcion que recibe el idHuesped por parametro que comprueba si existe en la base de datos, si existe devuelve true si no
+devuelve false*/
+
 create or replace FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
 
 CURSOR curs IS
@@ -457,6 +441,11 @@ end pagosAnuales;
 /
 --Requisito Nº12
 
+/*Nombre componente: aplicarDescuento
+Autor: Imanol Garcia Fecha: 25/04/19
+Descripción: Recibe por parametro un cupon y un precio, el cupon tiene asignado un porcentaje de descuento que se le aplicara al precio y
+devolvera el precio con el descuento correspondiente*/
+
 CREATE OR REPLACE FUNCTION aplicarDescuento (idCup VARCHAR2, precio NUMBER) RETURN NUMBER IS
 
 v_precioConDesc NUMBER;
@@ -473,7 +462,7 @@ OPEN CURS;
     FETCH curs INTO registro;
     
     IF curs%notfound THEN
-        DBMS_OUTPUT.PUT_LINE('El cupon introducido no existe');
+        DBMS_OUTPUT.PUT_LINE('El cupón introducido no existe');
     ELSE 
     v_precioConDesc := precio/registro.descuento;        
     
@@ -553,7 +542,14 @@ end imprReserva;
 /
 --Requisito Nº15
 
+CREATE OR REPLACE PROCEDURE auditoria (gd VARCHAR2) IS
 
+begin
+
+INSERT INTO AUDITORIA VALUES (gd);
+
+END;
+/
 
 
 

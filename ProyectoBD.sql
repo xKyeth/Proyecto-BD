@@ -433,4 +433,13 @@ CONSTRAINT   PK_usuario_res PRIMARY KEY (usremail)
 )
 
 
+CREATE TABLE Auditoria (
+    
+    guardado VARCHAR2(500)
+
+)
+
+
+
+
 Commit;  

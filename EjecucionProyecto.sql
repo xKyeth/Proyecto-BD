@@ -14,12 +14,22 @@ Begin
 End;
 /
 --Requisito Nº3
-Declare
-    
-Begin
-    
-End;
+
+DECLARE
+
+idH NUMBER;
+idP NUMBER;
+
+BEGIN
+
+idH:='&IDHuespd';
+idP:='&IDPrepago';
+
+rellenarprephuesped(idH,idP);
+
+END;
 /
+
 --Requisito Nº4
 Declare
     
@@ -35,11 +45,17 @@ Begin
 End;
 /
 --Requisito Nº6
-Declare
-    
-Begin
-    
-End;
+
+DECLARE
+
+v_idH NUMBER;
+
+BEGIN
+
+v_idH:='&IDHuesped';
+fichahuesped(v_idH);
+
+END;
 /
 --Requisito Nº7
 Declare
@@ -56,12 +72,23 @@ Begin
 End;
 /
 --Requisito Nº9
-Declare
-    
-Begin
-    
-End;
+DECLARE
+
+idH NUMBER;
+
+BEGIN
+
+idH:='&IDHuespd';
+
+    IF comprHuesped(idH) THEN
+        DBMS_OUTPUT.PUT_LINE('Correcto');
+    ELSE 
+        DBMS_OUTPUT.PUT_LINE('Incorrecto');
+    END IF;    
+
+END;
 /
+
 --Requisito Nº10
 Declare
     
@@ -79,8 +106,11 @@ End;
 /
 --Requisito Nº12
 Declare
-    
+    cupon varchar2(200):=('&Cupon');
+    precio number:=('&Precio');
 Begin
+
+    DBMS_OUTPUT.PUT_LINE(aplicarDescuento(cupon,precio));
     
 End;
 /
