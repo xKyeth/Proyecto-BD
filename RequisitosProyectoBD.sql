@@ -375,6 +375,29 @@ end reservasPais;
 /
 --Requisito Nº9
 
+create or replace FUNCTION comprHuesped (idHues NUMBER) RETURN BOOLEAN IS
+
+CURSOR curs IS
+    SELECT idhuesped FROM huesped WHERE idhuesped=idHues; 
+registro curs%ROWTYPE;
+
+BEGIN
+
+OPEN curs;
+
+    FETCH curs INTO registro;
+
+    IF idHues IN (registro.idhuesped) THEN
+        DBMS_OUTPUT.PUT_LINE('El huesped existe en la base de datos');
+        RETURN TRUE;
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('El huesped no existe en la base de datos');
+        RETURN false;
+    END IF;
+
+CLOSE curs;
+END;
+/
 
 
 --Requisito Nº10
