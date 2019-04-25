@@ -557,13 +557,13 @@ Create or replace trigger audCiudad
     FOR EACH ROW
 begin
     IF DELETING THEN
-        auditoriatablas((:old_buffer.IdCiudad || :old_buffer.NOMCIUDAD || :old_buffer.IDPAIS || 'Deleting Ciudad'));
+        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Deleting Ciudad'));
     END IF;
     IF updating THEN
-        auditoriatablas((:old_buffer.IdCiudad || :old_buffer.NOMCIUDAD || :old_buffer.IDPAIS || 'Inserting Ciudad'));
+        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Inserting Ciudad'));
     END IF;
     if inserting THEN
-        auditoriatablas((:new_buffer.IdCiudad || :new_buffer.NOMCIUDAD || :new_buffer.IDPAIS || 'Updating Ciudad'));
+        auditoriatablas((:new_buffer.IdCiudad ||' '|| :new_buffer.NOMCIUDAD ||' '|| :new_buffer.IDPAIS ||' '|| 'Updating Ciudad'));
     END IF;
 end audCiudad;
 /
