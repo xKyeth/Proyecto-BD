@@ -568,6 +568,74 @@ end audCiudad;
 /
 
 
+Create or replace trigger audHotel
+    before INSERT OR UPDATE OR DELETE ON Hotel
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdHotel ||' '|| :old_buffer.nomhotel ||' '|| :old_buffer.idciudad ||' '|| 'Deleting Hotel'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdHotel ||' '|| :old_buffer.nomhotel ||' '|| :old_buffer.idciudad ||' '|| 'Inserting Hotel'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdHotel ||' '|| :new_buffer.nomhotel ||' '|| :new_buffer.idciudad ||' '|| 'Updating Hotel'));
+    END IF;
+end audHotel;
+/
+
+Create or replace trigger audPais
+    before INSERT OR UPDATE OR DELETE ON Pais
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdPais ||' '|| :old_buffer.nompais ||' '|| 'Deleting Pais'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdPais ||' '|| :old_buffer.nompais ||' '|| 'Inserting Pais'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdPais ||' '|| :new_buffer.nompais ||' '|| 'Updating Pais'));
+    END IF;
+end audPais;
+/
+
+Create or replace trigger audUsoHAB
+    before INSERT OR UPDATE OR DELETE ON UsoHab
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdHotel ||' '|| :old_buffer.NUMHABITACION ||' '|| :old_buffer.fecha ||' '|| :old_buffer.ocupada ||' '|| 'Deleting UsoHab'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdHotel ||' '|| :old_buffer.NUMHABITACION ||' '|| :old_buffer.fecha ||' '|| :old_buffer.ocupada ||' '|| 'Inserting UsoHab'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdHotel ||' '|| :new_buffer.NUMHABITACION ||' '|| :new_buffer.fecha ||' '|| :new_buffer.ocupada ||' '|| 'Updating UsoHab'));
+    END IF;
+end audHotel;
+/
+
+Create or replace trigger audREserva
+    before INSERT OR UPDATE OR DELETE ON Reserva
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdReserva ||' '|| :old_buffer.usrmail ||' '|| :old_buffer.idHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.canthuesp ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchreserva ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| 'Deleting Reserva'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdReserva ||' '|| :old_buffer.usrmail ||' '|| :old_buffer.idHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.canthuesp ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchreserva ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| 'Inserting Reserva'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdReserva ||' '|| :new_buffer.usrmail ||' '|| :new_buffer.idHotel ||' '|| :new_buffer.numhabitacion ||' '|| :new_buffer.canthuesp ||' '|| :new_buffer.idregimen ||' '|| :new_buffer.fchreserva ||' '|| :new_buffer.fchdesde ||' '|| :new_buffer.fchhasta ||' '|| 'Updating Reserva'));
+    END IF;
+end audHotel;
+/
+
 
 
 
