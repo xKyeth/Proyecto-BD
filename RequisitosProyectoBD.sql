@@ -1,6 +1,6 @@
 --Requisito Nº1
 
-/*Nombre componente: Enrique Albors Perilli
+/*Nombre componente: buscaHabitacion
 Autor: Enrique Albors Perilli	Fecha:10/04/2019
 Descripción:  Este procedimiento , buscará  habitaciones según tipo y nº camas ,mostrar habitaciones disponibles por hotel, se podrá elegir un hotel para mostrar datos de este y las habitaciones.*/
 
@@ -143,11 +143,10 @@ END;
 --Requisito Nº4
 
 
- /*Nombre componente: Enrique Albors Perilli
-Autor: Enrique Albors Perilli	Fecha: 11/04/2019
+ /*Nombre componente: creaUsuario2
+ Autor: Enrique Albors Perilli	Fecha: 11/04/2019
 Descripción: Este procedimiento permitira´ que se cree un usuario automáticamente pasando un email y su passw
-ademas para controlar que la longitud de la contraseña no excede a lo que que queremos , se controlará la longitud de 
-la contraseña con una función*/
+ , ademas se pedirá  una longitud minima de contraseña*/
 
 create or replace procedure creaUsuario2 (usuario char , passwd char) is
  
@@ -173,8 +172,8 @@ end;
 create or replace function validaContra (contra varchar2)
 return boolean is
     begin 
-        if (LENGTH(contra)<6)then
-            DBMS_OUTPUT.PUT_LINE('la longitud de su contraseña debe ser menor');RETURN false;
+        if (LENGTH(contra)>6)then
+            DBMS_OUTPUT.PUT_LINE('la longitud de su contraseña debe ser mayor');RETURN false;
         else 
              DBMS_OUTPUT.PUT_LINE('la longitud de su  contraseña es correcta');return true;
         end if;
@@ -259,7 +258,7 @@ END;
 
 --Requisito Nº7
 
-/*Nombre componente: Enrique Albors Perilli
+/*Nombre componente: fichaHoteles
 Autor: Enrique Albors Perilli	Fecha: 17/04/2019
 Descripcion : Este procedimiento devolverá todos los datos relevantes de un hotel a raiz del codigo del hotel.*/
 
@@ -354,8 +353,8 @@ end reservasPais;
 /
 --Requisito Nº9
 
-/*Nombre componente: Enrique Albors Perilli
-Autor: Enrique Imanol Garcia Fecha: 25/04/2019
+/*Nombre componente: comprHuesped
+Autor:  Imanol Garcia Fecha: 25/04/2019
 Descripcion : Funcion que recibe el idHuesped por parametro que comprueba si existe en la base de datos, si existe devuelve true si no
 devuelve false*/
 
@@ -386,7 +385,7 @@ END;
 
 --Requisito Nº10
 
-/*Nombre componente: Enrique Albors Perilli
+/*Nombre componente: pagoCorrecto
 Autor: Enrique Albors Perilli	Fecha: 11/04/2019
 Descripcion : Procedimiento que a raiz de un codigo de pago , informará si el metodo de pago es aceptado o no .
 */
@@ -479,7 +478,7 @@ END;
 
 
 --Requisito Nº13
-/*Nombre componente: Enrique Albors Perilli
+/*Nombre componente: esperareserva
 Autor: Enrique Albors Perilli	Fecha: 24/04/2019
 Descripcion :Este trigger se dispará cuando se cree una nueva reserva , pasando el usuario que la cree a una tabla
 especifico para el
