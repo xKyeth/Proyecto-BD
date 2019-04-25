@@ -542,7 +542,7 @@ end imprReserva;
 /
 --Requisito Nº15
 
-CREATE OR REPLACE PROCEDURE auditoria (gd VARCHAR2) IS
+CREATE OR REPLACE PROCEDURE auditoriatablas (gd VARCHAR2) IS
 
 begin
 
@@ -551,5 +551,20 @@ INSERT INTO AUDITORIA VALUES (gd);
 END;
 /
 
-
+Create or replace trigger audCiudad
+    before INSERT OR UPDATE OR DELETE ON Ciudad
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdCiudad || :old_buffer.NOMCIUDAD || :old_buffer.IDPAIS || 'Deleting Ciudad'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdCiudad || :old_buffer.NOMCIUDAD || :old_buffer.IDPAIS || 'Inserting Ciudad'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdCiudad || :new_buffer.NOMCIUDAD || :new_buffer.IDPAIS || 'Updating Ciudad'));
+    END IF;
+end audCiudad;
+/
 
