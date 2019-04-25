@@ -637,5 +637,186 @@ end audHotel;
 /
 
 
+Create or replace trigger audCiudad
+    before INSERT OR UPDATE OR DELETE ON Ciudad
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Deleting Ciudad'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Inserting Ciudad'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdCiudad ||' '|| :new_buffer.NOMCIUDAD ||' '|| :new_buffer.IDPAIS ||' '|| 'Updating Ciudad'));
+    END IF;
+end audCiudad;
+/
+
+Create or replace trigger audCupon
+    before INSERT OR UPDATE OR DELETE ON Cupon
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.idcupon ||' '|| :old_buffer.descuento ||' '|| 'Deleting Cupon'));
+    END IF;
+    IF updating THEN
+    auditoriatablas((:old_buffer.idcupon ||' '|| :old_buffer.descuento ||' '|| 'Inserting Cupon'));
+    END IF;
+    if inserting THEN
+    auditoriatablas((:new_buffer.idcupon ||' '|| :new_buffer.descuento ||' '|| 'Updating Cupon'));
+    END IF;
+end audCiudad;
+/
+
+Create or replace trigger audHuesped
+    before INSERT OR UPDATE OR DELETE ON huesped
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+    auditoriatablas((:old_buffer.idhuesped ||' '|| :old_buffer.nomhuesped ||' '||:old_buffer.apepaterno ||' '||:old_buffer.apematerno ||' '||:old_buffer.tipodocumento ||' '||:old_buffer.numdocumento ||' '||:old_buffer.email ||' '||:old_buffer.tel ||' '||:old_buffer.pais ||' '|| 'Deleting huesped'));
+    END IF;
+    IF updating THEN
+    auditoriatablas((:old_buffer.idhuesped ||' '|| :old_buffer.nomhuesped ||' '||:old_buffer.apepaterno ||' '||:old_buffer.apematerno ||' '||:old_buffer.tipodocumento ||' '||:old_buffer.numdocumento ||' '||:old_buffer.email ||' '||:old_buffer.tel ||' '||:old_buffer.pais ||' '|| 'Inserting huesped'));
+    END IF;
+    if inserting THEN
+    auditoriatablas((:new_buffer.idhuesped ||' '|| :new_buffer.nomhuesped ||' '||:new_buffer.apepaterno ||' '||:new_buffer.apematerno ||' '||:new_buffer.tipodocumento ||' '||:new_buffer.numdocumento ||' '||:new_buffer.email ||' '||:new_buffer.tel ||' '||:new_buffer.pais ||' '|| 'Updating huesped'));
+    END IF;
+end audHuesped;
+/
+
+
+Create or replace trigger audRegimen
+    before INSERT OR UPDATE OR DELETE ON Regimen
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.idregimen ||' '|| :old_buffer.descrregimen ||' '|| 'Deleting Regimen'));
+    END IF;
+    IF updating THEN
+    auditoriatablas((:old_buffer.idregimen ||' '|| :old_buffer.descrregimen ||' '|| 'Inserting Regimen'));
+    END IF;
+    if inserting THEN
+    auditoriatablas((:new_buffer.idregimen ||' '|| :new_buffer.descrregimen ||' '|| 'Updating Regimen'));
+    END IF;
+end audRegimen;
+/
+
+Create or replace trigger audReservaporpagar
+    before INSERT OR UPDATE OR DELETE ON Reservaporpagar
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.usremail ||' '||  'Deleting Reservaporpagar'));
+    END IF;
+    IF updating THEN
+    auditoriatablas((:old_buffer.usremail ||' '||  'Inserting Reservaporpagar'));
+    END IF;
+    if inserting THEN
+    auditoriatablas((:new_buffer.usremail ||' '||  'Updating Reservaporpagar'));
+    END IF;
+end audReservaporpagar;
+/
+
+Create or replace trigger audUsuario
+    before INSERT OR UPDATE OR DELETE ON Usuario
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.usremail ||' '|| :old_buffer.usrpwd ||' '|| 'Deleting Usuario'));
+    END IF;
+    IF updating THEN
+    auditoriatablas((:old_buffer.usremail ||' '|| :old_buffer.usrpwd ||' '|| 'Inserting Usuario'));
+    END IF;
+    if inserting THEN
+    auditoriatablas((:new_buffer.usremail ||' '|| :new_buffer.usrpwd ||' '|| 'Updating Usuario'));
+    END IF;
+end audUsuario;
+/
+
+
+Create or replace trigger audHabitacion
+    before INSERT OR UPDATE OR DELETE ON Habitacion
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.idtipohab ||' '|| :old_buffer.cantcamas ||' '|| 'Deleting Habitacion'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdHotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.idtipohab ||' '|| :old_buffer.cantcamas ||' '|| 'Inserting Habitacion'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdHotel ||' '|| :new_buffer.numhabitacion ||' '|| :new_buffer.idtipohab ||' '|| :new_buffer.cantcamas ||' '|| 'Updating Habitacion'));
+    END IF;
+end audHabitacion;
+/
+
+
+Create or replace trigger audMetodoDePago
+    before INSERT OR UPDATE OR DELETE ON Metodo_De_Pago
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.codigo_metodo ||' '|| :old_buffer.empresa ||' '|| 'Deleting Metodo de pago'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.codigo_metodo ||' '|| :old_buffer.empresa ||' '|| 'Inserting Metodo de pago'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.codigo_metodo ||' '|| :new_buffer.empresa ||' '|| 'Updating Metodo de pago'));
+    END IF;
+end audMetodoDePago;
+/
+
+
+
+Create or replace trigger audPrepago
+    before INSERT OR UPDATE OR DELETE ON Prepago
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.idprepago ||' '|| :old_buffer.usremail ||' '|| :old_buffer.idhotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchprepago ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| :old_buffer.total ||' '|| :old_buffer.codigopago ||' '||  'Deleting Prepago'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.idprepago ||' '|| :old_buffer.usremail ||' '|| :old_buffer.idhotel ||' '|| :old_buffer.numhabitacion ||' '|| :old_buffer.idregimen ||' '|| :old_buffer.fchprepago ||' '|| :old_buffer.fchdesde ||' '|| :old_buffer.fchhasta ||' '|| :old_buffer.total ||' '|| :old_buffer.codigopago ||' '|| 'Inserting Prepago'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.idprepago ||' '|| :new_buffer.usremail ||' '|| :new_buffer.idhotel ||' '|| :new_buffer.numhabitacion ||' '|| :new_buffer.idregimen ||' '|| :new_buffer.fchprepago ||' '|| :new_buffer.fchdesde ||' '|| :new_buffer.fchhasta ||' '|| :new_buffer.total ||' '|| :new_buffer.codigopago ||' '||  'Updating Prepago'));
+    END IF;
+end audPrepago;
+/
+
+
+Create or replace trigger audTipoHab
+    before INSERT OR UPDATE OR DELETE ON TipoHab
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.idHotel ||' '|| :old_buffer.idTipoHab ||' '|| 'Deleting Tipo Habitacion'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.idHotel ||' '|| :old_buffer.idTipoHab ||' '|| 'Inserting Tipo Habitacion'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.idHotel ||' '|| :new_buffer.idTipoHab ||' '|| 'Updating Tipo Habitacion'));
+    END IF;
+end audTipoHab;
+/
+
+
+
+
+
+
 
 
