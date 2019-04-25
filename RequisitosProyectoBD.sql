@@ -1,8 +1,8 @@
---Requisito Nº1
+--Requisito Nï¿½1
 
 /*Nombre componente: buscaHabitacion
 Autor: Enrique Albors Perilli	Fecha:10/04/2019
-Descripción:  Este procedimiento , buscará  habitaciones según tipo y nº camas ,mostrar habitaciones disponibles por hotel, se podrá elegir un hotel para mostrar datos de este y las habitaciones.*/
+Descripciï¿½n:  Este procedimiento , buscarï¿½  habitaciones segï¿½n tipo y nï¿½ camas ,mostrar habitaciones disponibles por hotel, se podrï¿½ elegir un hotel para mostrar datos de este y las habitaciones.*/
 
 
 
@@ -34,10 +34,10 @@ end;
 
 exec buscaHabitacion ( '3' ,'14325' );
 
---Requisito Nº2
+--Requisito Nï¿½2
 /*Nombre componente: comprHabitacion
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Funcion que comprueba las reservas y devuelve si una habitaciÃ³n se debe ocupar*/
+Descripciï¿½n: Funcion que comprueba las reservas y devuelve si una habitaciÃ³n se debe ocupar*/
 
 CREATE OR REPLACE FUNCTION comprHabitacion(numHab number, idHot number)
 return boolean is
@@ -55,7 +55,7 @@ end comprHabitacion;
 /
 /*Nombre componente: ocuparHab
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Procedimiento que pasando una habitaciÃ³n y si debe ocuparse(0/1), ocupa o desocupa la habitaciÃ³n*/
+Descripciï¿½n: Procedimiento que pasando una habitaciÃ³n y si debe ocuparse(0/1), ocupa o desocupa la habitaciÃ³n*/
 
 Create or replace procedure ocuparHab(numHab number, idHot number, ocupar number)
 is
@@ -65,7 +65,7 @@ end ocuparHab;
 /
 /*Nombre componente: ocuparHabitaciones
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Procedimiento que recorre todas las habitaciones y utiliza el procedimiento y la funciÃ³n anterior para comprobar y ocupar las 
+Descripciï¿½n: Procedimiento que recorre todas las habitaciones y utiliza el procedimiento y la funciÃ³n anterior para comprobar y ocupar las 
 habitaciones*/
 
 CREATE OR REPLACE PROCEDURE ocuparHabitaciones
@@ -83,11 +83,11 @@ BEGIN
 END ocuparHabitaciones;
 /
 
---Requisito Nº3
+--Requisito Nï¿½3
 
 /*Nombre componente: comprPrepago
 Autor: Imanol Garcia Fecha: 25/04/19
-Descripción: Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
+Descripciï¿½n: Funcion que recibe por parametro el ID de prepago y verifica que existe en la base de datos.Si existe devuelve true, en caso de que no
 devolvera un false */
 
 
@@ -119,7 +119,7 @@ END;
 
 /*Nombre componente: RellenarPrepHuesped
 Autor: Imanol Garcia Fecha: 25/04/19
-Descripción: Procedimiento que recibe por parametro los ID de huesped y prepago,llama a las dos funciones que verifican que exite el idHuesped y el idPrepago.
+Descripciï¿½n: Procedimiento que recibe por parametro los ID de huesped y prepago,llama a las dos funciones que verifican que exite el idHuesped y el idPrepago.
 Si existe el idHuesped se procede a verificar el idPrepago, si los dos existen se insertan los datos */
 
 
@@ -140,13 +140,13 @@ END;
 /
 
 
---Requisito Nº4
+--Requisito Nï¿½4
 
 
  /*Nombre componente: creaUsuario2
  Autor: Enrique Albors Perilli	Fecha: 11/04/2019
-Descripción: Este procedimiento permitira´ que se cree un usuario automáticamente pasando un email y su passw
- , ademas se pedirá  una longitud minima de contraseña*/
+Descripciï¿½n: Este procedimiento permitiraï¿½ que se cree un usuario automï¿½ticamente pasando un email y su passw
+ , ademas se pedirï¿½  una longitud minima de contraseï¿½a*/
 
 create or replace procedure creaUsuario2 (usuario char , passwd char) is
  
@@ -173,19 +173,19 @@ create or replace function validaContra (contra varchar2)
 return boolean is
     begin 
         if (LENGTH(contra)>6)then
-            DBMS_OUTPUT.PUT_LINE('la longitud de su contraseña debe ser mayor');RETURN false;
+            DBMS_OUTPUT.PUT_LINE('la longitud de su contraseï¿½a debe ser mayor');RETURN false;
         else 
-             DBMS_OUTPUT.PUT_LINE('la longitud de su  contraseña es correcta');return true;
+             DBMS_OUTPUT.PUT_LINE('la longitud de su  contraseï¿½a es correcta');return true;
         end if;
 end validaContra;
 /
 
 
---Requisito Nº5
+--Requisito Nï¿½5
 
 /*Nombre componente: BuscarHotel
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Procedimiento que pasado un nombre de ciudad comprueba si existen hoteles en dicha ciudad*/
+Descripciï¿½n: Procedimiento que pasado un nombre de ciudad comprueba si existen hoteles en dicha ciudad*/
 
 create or replace procedure BuscarHotel(ciudad varchar2)
 is
@@ -203,7 +203,7 @@ open hoteles;
         DBMS_OUTPUT.PUT_LINE('No hay ningun hotel');
     end if;
 close hoteles;
-    --Aqui muestro los registros de los del cursor, sino hubiese ninguno daría igual, ya que no se mostraría niguno y
+    --Aqui muestro los registros de los del cursor, sino hubiese ninguno darï¿½a igual, ya que no se mostrarï¿½a niguno y
     --y se activa el if anterior
     for reg in hoteles loop
         DBMS_output.put_line('Nombre: '|| reg.nomHotel || ', ID: ' || reg.idHotel);
@@ -211,12 +211,12 @@ close hoteles;
 end BuscarHotel;
 /
 
---Requisito Nº6
+--Requisito Nï¿½6
 
 
 /*Nombre componente: FichaHuesped
 Autor: Imanol Garcia Fecha: 25/04/19
-Descripción: Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
+Descripciï¿½n: Procedimiento al que se le pasa un ID Huesped por parametro, se verifica que exista el ID pasado, si es asi, se imprimira una ficha
 con todos los datos del Huesped. */
 
 
@@ -256,11 +256,11 @@ END;
 
 
 
---Requisito Nº7
+--Requisito Nï¿½7
 
 /*Nombre componente: fichaHoteles
 Autor: Enrique Albors Perilli	Fecha: 17/04/2019
-Descripcion : Este procedimiento devolverá todos los datos relevantes de un hotel a raiz del codigo del hotel.*/
+Descripcion : Este procedimiento devolverï¿½ todos los datos relevantes de un hotel a raiz del codigo del hotel.*/
 
 
  create or replace procedure fichaHoteles (cod number) is
@@ -326,10 +326,10 @@ end;
 
 exec fichahoteles ('14325');
 
---Requisito Nº8
+--Requisito Nï¿½8
 /*Nombre componente: reservasPais
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Procedimiento que pasado un pais devuelve las reservas que hicieron los cliente de este*/
+Descripciï¿½n: Procedimiento que pasado un pais devuelve las reservas que hicieron los cliente de este*/
 
 Create or replace procedure reservasPais(pai varchar2)
 is
@@ -351,10 +351,10 @@ begin
     end loop;
 end reservasPais;
 /
---Requisito Nº9
+--Requisito Nï¿½9
 
 /*Nombre componente: comprHuesped
-Autor:  Imanol Garcia Fecha: 25/04/2019
+Autor:Imanol Garcia Fecha: 25/04/2019
 Descripcion : Funcion que recibe el idHuesped por parametro que comprueba si existe en la base de datos, si existe devuelve true si no
 devuelve false*/
 
@@ -383,11 +383,11 @@ END;
 /
 
 
---Requisito Nº10
+--Requisito Nï¿½10
 
 /*Nombre componente: pagoCorrecto
 Autor: Enrique Albors Perilli	Fecha: 11/04/2019
-Descripcion : Procedimiento que a raiz de un codigo de pago , informará si el metodo de pago es aceptado o no .
+Descripcion : Procedimiento que a raiz de un codigo de pago , informarï¿½ si el metodo de pago es aceptado o no .
 */
 
 create or replace procedure pagoCorrecto (codigo char ) is
@@ -412,13 +412,13 @@ end;
 
 EXEC PAGOCORRECTO (8);
 
---Requisito Nº11
+--Requisito Nï¿½11
 /*Nombre componente: pagosAnuales
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Procedimiento en el cual se le pasa un huesped y una año y te devuelve los pagos de ese huesped ese año y el total*/
+Descripciï¿½n: Procedimiento en el cual se le pasa un huesped y una aï¿½o y te devuelve los pagos de ese huesped ese aï¿½o y el total*/
 Create or replace procedure pagosAnuales(idHues number, ano number)
 is
-    --Cursor en el cual saco el total de los pagos del cliente ese año
+    --Cursor en el cual saco el total de los pagos del cliente ese aï¿½o
     Cursor Total is Select (h.nomhuesped || ' ' || h.apepaterno || ' ' || h.apematerno ) as Nombre, h.idhuesped, To_Char(NVL(SUM(pr.total), '0'), '999g999g990d99l' ) as totalpag
         from huesped h, prepago pr, prephues ph
         where h.idhuesped=idHues and h.idhuesped=ph.idhuesped
@@ -438,11 +438,11 @@ begin
     end loop;
 end pagosAnuales;
 /
---Requisito Nº12
+--Requisito Nï¿½12
 
 /*Nombre componente: aplicarDescuento
 Autor: Imanol Garcia Fecha: 25/04/19
-Descripción: Recibe por parametro un cupon y un precio, el cupon tiene asignado un porcentaje de descuento que se le aplicara al precio y
+Descripciï¿½n: Recibe por parametro un cupon y un precio, el cupon tiene asignado un porcentaje de descuento que se le aplicara al precio y
 devolvera el precio con el descuento correspondiente*/
 
 CREATE OR REPLACE FUNCTION aplicarDescuento (idCup VARCHAR2, precio NUMBER) RETURN NUMBER IS
@@ -461,12 +461,12 @@ OPEN CURS;
     FETCH curs INTO registro;
     
     IF curs%notfound THEN
-        DBMS_OUTPUT.PUT_LINE('El cupón introducido no existe');
+        DBMS_OUTPUT.PUT_LINE('El cupï¿½n introducido no existe');
     ELSE 
     v_precioConDesc := precio/registro.descuento;        
     
     DBMS_OUTPUT.PUT_LINE('El precio original es : ' || precio || ' al que se le ha aplicado un descuento de : ' || registro.descuento || 
-    ' del cupón : ' || idCup || ' ,el precio con el descuento aplicado es : ' || ROUND(v_preciocondesc,2));
+    ' del cupï¿½n : ' || idCup || ' ,el precio con el descuento aplicado es : ' || ROUND(v_preciocondesc,2));
     
     END IF;
     
@@ -477,10 +477,10 @@ END;
 /
 
 
---Requisito Nº13
+--Requisito Nï¿½13
 /*Nombre componente: esperareserva
 Autor: Enrique Albors Perilli	Fecha: 24/04/2019
-Descripcion :Este trigger se dispará cuando se cree una nueva reserva , pasando el usuario que la cree a una tabla
+Descripcion :Este trigger se disparï¿½ cuando se cree una nueva reserva , pasando el usuario que la cree a una tabla
 especifico para el
 */
 
@@ -502,11 +502,11 @@ end;
 
 
 
---Requisito Nº14
+--Requisito Nï¿½14
 
 /*Nombre componente: imprReserva
 Autor: Pedro Cortes	Fecha: 22/04/19
-Descripción: Procedimiento el cual nos indica los datos de una reserva mostrando los datos de esta*/
+Descripciï¿½n: Procedimiento el cual nos indica los datos de una reserva mostrando los datos de esta*/
 
 Create or replace procedure imprReserva(idR number)
 is
@@ -527,8 +527,8 @@ Begin
     DBMS_OUTPUT.PUT_LINE('ID de la Reserva : ' || registro.idReserva);
     DBMS_OUTPUT.PUT_LINE('Email del usuario : ' || registro.usremail);
     DBMS_OUTPUT.PUT_LINE('Hotel : ' || registro.nomHotel);
-    DBMS_OUTPUT.PUT_LINE('  Nº Habitacion : ' || registro.numHabitacion);
-    DBMS_OUTPUT.PUT_LINE('  Nº Huespedes : ' || registro.canthuesp);
+    DBMS_OUTPUT.PUT_LINE('  Nï¿½ Habitacion : ' || registro.numHabitacion);
+    DBMS_OUTPUT.PUT_LINE('  Nï¿½ Huespedes : ' || registro.canthuesp);
     DBMS_OUTPUT.PUT_LINE('  Tipo de reserva : ' || registro.descrRegimen);
     DBMS_OUTPUT.PUT_LINE('Fecha de la reserva : ' || registro.fchReserva);
     DBMS_OUTPUT.PUT_LINE('  Inicio de la reserva : ' || registro.fchDesde);
@@ -539,9 +539,9 @@ Begin
     end if;
 end imprReserva;
 /
---Requisito Nº15
+--Requisito Nï¿½15
 
-CREATE OR REPLACE PROCEDURE auditoria (gd VARCHAR2) IS
+CREATE OR REPLACE PROCEDURE auditoriatablas (gd VARCHAR2) IS
 
 begin
 
@@ -549,6 +549,25 @@ INSERT INTO AUDITORIA VALUES (gd);
 
 END;
 /
+
+Create or replace trigger audCiudad
+    before INSERT OR UPDATE OR DELETE ON Ciudad
+    REFERENCING OLD AS old_buffer NEW AS new_buffer 
+    FOR EACH ROW
+begin
+    IF DELETING THEN
+        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Deleting Ciudad'));
+    END IF;
+    IF updating THEN
+        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Inserting Ciudad'));
+    END IF;
+    if inserting THEN
+        auditoriatablas((:new_buffer.IdCiudad ||' '|| :new_buffer.NOMCIUDAD ||' '|| :new_buffer.IDPAIS ||' '|| 'Updating Ciudad'));
+    END IF;
+end audCiudad;
+/
+
+
 
 
 
