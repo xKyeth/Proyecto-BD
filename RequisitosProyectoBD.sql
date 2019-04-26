@@ -192,7 +192,7 @@ Descripci�n: Procedimiento que pasado un nombre de ciudad comprueba si existen
 create or replace procedure BuscarHotel(ciudad varchar2)
 is
     id number;
-    nombre varchar2(20);
+    nombre varchar2(40);
     --Con el cursor ya filtro solo los hoteles de la ciudad introducida
     Cursor hoteles is Select h.idHotel, h.nomHotel
         from hotel h, ciudad c
