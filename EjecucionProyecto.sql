@@ -147,5 +147,5 @@ Begin
 End;
 /
 --Requisito Nº15
-s
+
 --Son las auditorias
