@@ -36,7 +36,7 @@ END;
 --Requisito Nº4
 Declare
 Usuario char(25) :='&Usuario';
-Passwd char(12) :='&Passwd';
+Passwd varchar2(12) :='&Passwd';
     
 Begin 
     creaUsuario2(Usuario , Passwd);
@@ -121,6 +121,8 @@ Begin
 End;
 /
 --Requisito Nº12
+
+--L13Bm39JVd cupon
 Declare
     cupon varchar2(200):=('&Cupon');
     precio number:=('&Precio');
@@ -145,9 +147,5 @@ Begin
 End;
 /
 --Requisito Nº15
-Declare
-    
-Begin
-    
-End;
-/
+s
+--Son las auditorias

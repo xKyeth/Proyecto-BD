@@ -179,7 +179,7 @@ begin
 end;
 /
 
- exec creaUsuario2 ('3' , '3444558');
+ exec creaUsuario2 ('5' , '34445');
  select usremail  , usrpwd from usuario ;
 
 
@@ -468,7 +468,7 @@ OPEN CURS;
     v_precioConDesc := precio/registro.descuento;        
     
     DBMS_OUTPUT.PUT_LINE('El precio original es : ' || precio || ' al que se le ha aplicado un descuento de : ' || registro.descuento || 
-    ' del cupï¿½n : ' || idCup || ' ,el precio con el descuento aplicado es : ' || ROUND(v_preciocondesc,2));
+    '% del cupón : ' || idCup || ' ,el precio con el descuento aplicado es : ' || ROUND(v_preciocondesc,2));
     
     END IF;
     
@@ -486,8 +486,8 @@ Descripcion :Este trigger se disparï¿½ cuando se cree una nueva reserva , pasand
 especifico para el
 */
 
-INSERT INTO usuario VALUES ('usr8@gmail.com','pwd8');
-INSERT INTO reserva VALUES (11,'usr8@gmail.com',14325,1,1,'MP','31-12-2014','01-02-2015','15-02-2015');
+INSERT INTO usuario VALUES ('usr10@gmail.com','pwd8');
+INSERT INTO reserva VALUES (11,'usr10@gmail.com',14325,1,1,'MP','31-12-2014','01-02-2015','15-02-2015');
 
 
 

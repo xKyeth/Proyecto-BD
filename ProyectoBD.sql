@@ -411,7 +411,7 @@ insert into metodo_de_pago values (6 ,'financiado a 2 meses' );
 
 CREATE TABLE cupon (
 
-    idCupon VARCHAR2(10),
+    idCupon VARCHAR2(10) Primary key,
     descuento NUMBER(3)
 
 );
