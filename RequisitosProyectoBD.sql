@@ -83,7 +83,7 @@ BEGIN
 END ocuparHabitaciones;
 /
 
---Requisito Nï¿½3
+--Requisito Nº3
 
 /*Nombre componente: comprPrepago
 Autor: Imanol Garcia Fecha: 25/04/19
@@ -541,7 +541,12 @@ Begin
     end if;
 end imprReserva;
 /
---Requisito Nï¿½15
+--Requisito Nº15
+
+/*Nombre componente: auditoriatablas
+Autor: Imanol Garcia Fecha: 25/04/2019
+Descripcion :Este procedimiento inserta el dato pasado por parametro en la tabla auditoria*/
+
 
 CREATE OR REPLACE PROCEDURE auditoriatablas (gd VARCHAR2) IS
 
@@ -552,22 +557,10 @@ INSERT INTO AUDITORIA VALUES (gd);
 END;
 /
 
-Create or replace trigger audCiudad
-    before INSERT OR UPDATE OR DELETE ON Ciudad
-    REFERENCING OLD AS old_buffer NEW AS new_buffer 
-    FOR EACH ROW
-begin
-    IF DELETING THEN
-        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Deleting Ciudad'));
-    END IF;
-    IF updating THEN
-        auditoriatablas((:old_buffer.IdCiudad ||' '|| :old_buffer.NOMCIUDAD ||' '|| :old_buffer.IDPAIS ||' '|| 'Inserting Ciudad'));
-    END IF;
-    if inserting THEN
-        auditoriatablas((:new_buffer.IdCiudad ||' '|| :new_buffer.NOMCIUDAD ||' '|| :new_buffer.IDPAIS ||' '|| 'Updating Ciudad'));
-    END IF;
-end audCiudad;
-/
+/*Nombre componente: audHotel
+Autor: Pedro Cortes Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Hotel*/
+
 
 
 Create or replace trigger audHotel
@@ -586,6 +579,10 @@ begin
     END IF;
 end audHotel;
 /
+/*Nombre componente: audPais
+Autor: Pedro Cortes Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Pais*/
+
 
 Create or replace trigger audPais
     before INSERT OR UPDATE OR DELETE ON Pais
@@ -603,6 +600,10 @@ begin
     END IF;
 end audPais;
 /
+/*Nombre componente: audUsoHab
+Autor: Pedro Cortes Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla UsoHab*/
+
 
 Create or replace trigger audUsoHAB
     before INSERT OR UPDATE OR DELETE ON UsoHab
@@ -620,6 +621,10 @@ begin
     END IF;
 end audHotel;
 /
+/*Nombre componente: audReserva
+Autor: Pedro Cortes Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Reserva*/
+
 
 Create or replace trigger audREserva
     before INSERT OR UPDATE OR DELETE ON Reserva
@@ -638,6 +643,10 @@ begin
 end audHotel;
 /
 
+/*Nombre componente: audCiudad
+Autor: Pedro Cortes Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Ciudad*/
+
 
 Create or replace trigger audCiudad
     before INSERT OR UPDATE OR DELETE ON Ciudad
@@ -655,6 +664,10 @@ begin
     END IF;
 end audCiudad;
 /
+/*Nombre componente: audCupon
+Autor: Enrique Albors Perilli Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Cupon*/
+
 
 Create or replace trigger audCupon
     before INSERT OR UPDATE OR DELETE ON Cupon
@@ -672,6 +685,10 @@ begin
     END IF;
 end audCiudad;
 /
+/*Nombre componente: audHuesped
+Autor: Enrique Albors Perilli Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Huesped*/
+
 
 Create or replace trigger audHuesped
     before INSERT OR UPDATE OR DELETE ON huesped
@@ -690,6 +707,10 @@ begin
 end audHuesped;
 /
 
+/*Nombre componente: audRegimen
+Autor: Enrique Albors Perilli Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Regimen*/
+
 
 Create or replace trigger audRegimen
     before INSERT OR UPDATE OR DELETE ON Regimen
@@ -707,6 +728,10 @@ begin
     END IF;
 end audRegimen;
 /
+/*Nombre componente: audReservaPorPagar
+Autor: Enrique Albors Perilli Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla ReservaPorPagar*/
+
 
 Create or replace trigger audReservaporpagar
     before INSERT OR UPDATE OR DELETE ON Reservaporpagar
@@ -724,6 +749,10 @@ begin
     END IF;
 end audReservaporpagar;
 /
+/*Nombre componente: audUsuario
+Autor: Enrique Albors Perilli Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Usuario*/
+
 
 Create or replace trigger audUsuario
     before INSERT OR UPDATE OR DELETE ON Usuario
@@ -742,6 +771,10 @@ begin
 end audUsuario;
 /
 
+/*Nombre componente: audHabitacion
+Autor: Imanol Garcia Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Habitacion*/
+
 
 Create or replace trigger audHabitacion
     before INSERT OR UPDATE OR DELETE ON Habitacion
@@ -759,6 +792,10 @@ begin
     END IF;
 end audHabitacion;
 /
+
+/*Nombre componente: audMetodoDePago
+Autor: Imanol Garcia Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Metodo_De_Pago*/
 
 
 Create or replace trigger audMetodoDePago
@@ -779,6 +816,10 @@ end audMetodoDePago;
 /
 
 
+/*Nombre componente: audPrepago
+Autor: Imanol Garcia Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla Prepago*/
+
 
 Create or replace trigger audPrepago
     before INSERT OR UPDATE OR DELETE ON Prepago
@@ -796,6 +837,10 @@ begin
     END IF;
 end audPrepago;
 /
+
+/*Nombre componente: audTipoHab
+Autor: Imanol Garcia Fecha: 25/04/2019
+Descripcion :Trigger que salta antes de que se haga un delete, update o insert sobre la tabla TipoHab*/
 
 
 Create or replace trigger audTipoHab
